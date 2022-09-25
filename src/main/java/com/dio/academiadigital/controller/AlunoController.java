@@ -1,9 +1,14 @@
 package com.dio.academiadigital.controller;
 
+import com.dio.academiadigital.services.impl.AlunoServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/aluno")
 public class AlunoController {
+
+    @Autowired
+    private AlunoServiceImpl service;
 }
