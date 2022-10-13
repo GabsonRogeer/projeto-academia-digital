@@ -7,10 +7,13 @@ import com.dio.academiadigital.entity.form.AvaliacaoFisicaUpdateForm;
 import com.dio.academiadigital.repository.AlunoRepository;
 import com.dio.academiadigital.repository.AvaliacaoRepository;
 import com.dio.academiadigital.services.AvaliacaoFisicaService;
+import com.dio.academiadigital.services.exceptions.AlunoNotFoundException;
+import com.dio.academiadigital.services.exceptions.AlunoNullException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService {
@@ -25,17 +28,16 @@ public class AvaliacaoFisicaServiceImpl implements AvaliacaoFisicaService {
     public AvaliacaoFisica create(AvaliacaoFisicaForm form) {
         AvaliacaoFisica avaliacao = new AvaliacaoFisica();
         //impl exception
-        Aluno aluno = alunoRepository.findById(form.getAlunoId()).get();
+        Aluno aluno = alunoRepository.findById(form.getAlunoId()).orElseThrow(AlunoNullException::new);
         avaliacao.setAluno(aluno);
         avaliacao.setAltura(form.getAltura());
         avaliacao.setPeso(form.getPeso());
-
         return repository.save(avaliacao);
     }
 
     @Override
-    public AvaliacaoFisica get(Long id) {
-        return null;
+    public Optional<AvaliacaoFisica> get(Long id) {
+        return repository.findById(id);
     }
 
     @Override

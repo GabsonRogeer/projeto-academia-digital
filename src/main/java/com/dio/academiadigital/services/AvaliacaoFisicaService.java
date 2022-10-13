@@ -5,6 +5,7 @@ import com.dio.academiadigital.entity.form.AvaliacaoFisicaForm;
 import com.dio.academiadigital.entity.form.AvaliacaoFisicaUpdateForm;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AvaliacaoFisicaService {
 
@@ -17,10 +18,11 @@ public interface AvaliacaoFisicaService {
 
     /**
      * Retorna uma Avaliação Física que está no banco de dados de acordo com seu Id.
+     *
      * @param id - id da Avaliação Física que será exibida.
      * @return - Avaliação Física de acordo com o Id fornecido.
      */
-    AvaliacaoFisica get(Long id);
+    Optional<AvaliacaoFisica> get(Long id);
 
     /**
      * Retorna todas as Avaliações Física que estão no banco de dados.
